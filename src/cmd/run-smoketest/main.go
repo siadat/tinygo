@@ -36,6 +36,7 @@ func main() {
 		fmt.Printf("usage: %s make smoketest\n", filepath.Base(os.Args[0]))
 		os.Exit(1)
 	}
+	fmt.Println("threads: %d\n", threads)
 
 	commands, err := getMakeCommands(flag.Args())
 	if err != nil {

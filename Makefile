@@ -208,6 +208,19 @@ smoketest:
 
 smoketest-commands:
 	$(TINYGO) version
+	# test simulated boards on play.tinygo.org
+	$(TINYGO) build             -o test.wasm -tags=arduino              examples/blinky1
+	@$(MD5SUM) test.wasm
+	$(TINYGO) build             -o test.wasm -tags=hifive1b             examples/blinky1
+	@$(MD5SUM) test.wasm
+	$(TINYGO) build             -o test.wasm -tags=reelboard            examples/blinky1
+	@$(MD5SUM) test.wasm
+	$(TINYGO) build             -o test.wasm -tags=pca10040             examples/blinky2
+	@$(MD5SUM) test.wasm
+	$(TINYGO) build             -o test.wasm -tags=pca10056             examples/blinky2
+	@$(MD5SUM) test.wasm
+	$(TINYGO) build             -o test.wasm -tags=circuitplay_express  examples/blinky1
+	@$(MD5SUM) test.wasm
 	# test all examples (except pwm)
 	$(TINYGO) build -size short -o test.hex -target=pca10040            examples/blinky1
 	@$(MD5SUM) test.hex
@@ -237,19 +250,6 @@ smoketest-commands:
 	@$(MD5SUM) test.hex
 	$(TINYGO) build -size short -o test.hex -target=pca10040            examples/test
 	@$(MD5SUM) test.hex
-	# test simulated boards on play.tinygo.org
-	$(TINYGO) build             -o test.wasm -tags=arduino              examples/blinky1
-	@$(MD5SUM) test.wasm
-	$(TINYGO) build             -o test.wasm -tags=hifive1b             examples/blinky1
-	@$(MD5SUM) test.wasm
-	$(TINYGO) build             -o test.wasm -tags=reelboard            examples/blinky1
-	@$(MD5SUM) test.wasm
-	$(TINYGO) build             -o test.wasm -tags=pca10040             examples/blinky2
-	@$(MD5SUM) test.wasm
-	$(TINYGO) build             -o test.wasm -tags=pca10056             examples/blinky2
-	@$(MD5SUM) test.wasm
-	$(TINYGO) build             -o test.wasm -tags=circuitplay_express  examples/blinky1
-	@$(MD5SUM) test.wasm
 	# test all targets/boards
 	$(TINYGO) build -size short -o test.hex -target=pca10040-s132v6     examples/blinky1
 	@$(MD5SUM) test.hex
